@@ -18,7 +18,7 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = False
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -82,7 +82,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
-    "django_filters"
+    "django_filters",
 ]
 
 LOCAL_APPS = [
@@ -178,7 +178,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
-        "DIRS": [ "templates"], # str(APPS_DIR / "templates"),
+        "DIRS": ["templates"],  # str(APPS_DIR / "templates"),
         # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
         "APP_DIRS": True,
         "OPTIONS": {
@@ -270,7 +270,10 @@ if USE_TZ:
     # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
     CELERY_TIMEZONE = TIME_ZONE
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
-CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="redis://:3kQhL5EJlktI3wd8NpUKsoxiC4NkhAGC@redis-15237.c264.ap-south-1-1.ec2.cloud.redislabs.com:15237")
+CELERY_BROKER_URL = env(
+    "CELERY_BROKER_URL",
+    default="redis://:3kQhL5EJlktI3wd8NpUKsoxiC4NkhAGC@redis-15237.c264.ap-south-1-1.ec2.cloud.redislabs.com:15237",
+)
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
@@ -329,10 +332,13 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Local Development server"},
-        {"url": "https://task-manager-shivank.herokuapp.com", "description": "Production server"},
+        {
+            "url": "https://task-manager-shivank.herokuapp.com",
+            "description": "Production server",
+        },
     ],
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-LOGOUT_REDIRECT_URL = '/user/login'
+LOGOUT_REDIRECT_URL = "/user/login"
